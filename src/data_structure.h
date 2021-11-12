@@ -27,6 +27,8 @@ class graph{
         std::vector<std::vector<long int>> matrix; 
 };
 
+/* ---------------------------------------------------------------------- */
+
 // Declaring classes' method
 
 // Making graph
@@ -48,9 +50,16 @@ graph::graph(std::vector<std::vector<long int>> inputMat, long int inputRow){
     for (int i = 0, j = 0; (i < nodeNo) && (j < nodeNo); i++, j++){
         graphMat[i][j] = 0;
     }
+    // ASSIGNING WEIGHT VALUE TO VECTOR
     for (int i = 0; i < inputRow; i++){
-        if (inputMat[i][0] == inputMat[i][1]) graphMat[inputMat[i][0]-1][inputMat[i][1]-1] = 0;
-        else graphMat[inputMat[i][0]-1][inputMat[i][1]-1] = inputMat[i][2];
+        if (inputMat[i][0] == inputMat[i][1]){
+            graphMat[inputMat[i][0]-1][inputMat[i][1]-1] = 0;
+            graphMat[inputMat[i][1]-1][inputMat[i][0]-1] = 0;
+        }
+        else{
+            graphMat[inputMat[i][0]-1][inputMat[i][1]-1] = inputMat[i][2];
+            graphMat[inputMat[i][1]-1][inputMat[i][0]-1] = inputMat[i][2];
+        }
     }
     matrix = graphMat;
     graphMat.clear();
