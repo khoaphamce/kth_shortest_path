@@ -2,3 +2,4 @@ src/*.exe
 src/.vscode
 src/main
 src/*.out
+/.vscode
