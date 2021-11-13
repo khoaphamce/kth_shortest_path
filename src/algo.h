@@ -1,14 +1,15 @@
 #pragma once
 
-#include "data_structure.h"
-#include <math.h>
-#include "math_algo.h"
-#include <bits/stdc++.h>
-#include <algorithm>
+// #include "data_structure.h"
+// #include <math.h>
+// #include "math_algo.h"
+// #include <bits/stdc++.h>
+// #include <algorithm>
 
 #ifndef algo_h
 #define algo_h
 
+// CREATE ALL PERMUTATION OF EDGES' ORDER
 std::vector<std::vector<std::vector<long int>>> edges_order_perm(std::vector<std::vector<long int>> edgesVec){
     long int edgesNo = edgesVec.size();
     long int totalComb = math_algo_h::factorial(edgesNo);
