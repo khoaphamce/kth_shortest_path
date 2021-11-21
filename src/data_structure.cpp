@@ -44,6 +44,7 @@ graph::graph(std::vector<std::vector<long int>> inputMat, long int inputRow){
 
 // destructor
 graph::~graph(){
+    matrix.clear();
 }
 
 long int graph::maximum_node(){
@@ -169,7 +170,7 @@ graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<l
 
         // Delete edge in new graph
         
-        printf("prev edge need to be delete: %d -> %d \n", (node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
+        // printf("prev edge need to be delete: %d -> %d \n", (node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
         generatedGraph.delete_edge((node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
     }
 }

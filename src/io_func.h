@@ -9,6 +9,8 @@
 #ifndef io_func_h
 #define io_func_h
 
+namespace io_func
+{
 ds::graph input_graph(){
     std::cout << "number of row: ";
     long int n;
@@ -45,6 +47,6 @@ void display_edges(std::vector<std::vector<long int>> inputEdges){
         printf("%d --> %d | ", inputEdges[i][0], inputEdges[i][1]);
 }
 
-// }
+}
 
 #endif
