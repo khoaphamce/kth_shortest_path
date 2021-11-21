@@ -3,6 +3,7 @@
 #ifndef math_algo_h
 #define math_algo_h
 
+
 long int factorial(long int n){
     if (n == 0) return 1;
     long int returnVal = 1;

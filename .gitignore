@@ -3,3 +3,4 @@ src/.vscode
 src/main
 src/*.out
 /.vscode
+/build

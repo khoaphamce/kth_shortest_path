@@ -3,14 +3,15 @@
 // #include <iostream>
 // #include <iomanip>
 // #include <vector>
-// #include "data_structure.h"
 
+// namespace io_func
+// {
 #ifndef io_func_h
 #define io_func_h
 
-data_structure_h::graph input_graph(){
+ds::graph input_graph(){
     std::cout << "number of row: ";
-    int n;
+    long int n;
     std::cin >> n;
     
     std::cout << "Type in nodes and edges: " << std::endl;
@@ -20,7 +21,7 @@ data_structure_h::graph input_graph(){
             std::cin >> inputMat[i][j];
         }
     }
-    data_structure_h::graph myGraph(inputMat, n);
+    ds::graph myGraph(inputMat, n);
     return myGraph;
 }
 
@@ -43,5 +44,7 @@ void display_edges(std::vector<std::vector<long int>> inputEdges){
     for (int i = 0; i < edgesNo; i++)
         printf("%d --> %d | ", inputEdges[i][0], inputEdges[i][1]);
 }
+
+// }
 
 #endif
