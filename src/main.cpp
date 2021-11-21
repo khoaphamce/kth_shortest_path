@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <cstdio>
 #include <math.h>
-#include <bits/stdc++.h>
 #include "math_algo.h"
 #include "data_structure.h"
 #include "algo.h"

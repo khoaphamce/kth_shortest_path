@@ -1,6 +1,8 @@
 #include "data_structure.h"
 #include <algorithm>
 #include <cstdio>
+#include <string.h>
+#include <sstream>
 
 using namespace ds;
 

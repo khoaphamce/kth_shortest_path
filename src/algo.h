@@ -1,10 +1,6 @@
 #pragma once
 
-// #include "data_structure.h"
-// #include <math.h>
-// #include "math_algo.h"
-// #include <bits/stdc++.h>
-// #include <algorithm>
+#include <algorithm>
 
 #ifndef algo_h
 #define algo_h
