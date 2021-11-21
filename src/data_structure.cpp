@@ -1,4 +1,5 @@
 #include "data_structure.h"
+#include <algorithm>
 #include <cstdio>
 
 using namespace ds;
@@ -97,6 +98,16 @@ void graph::copy (graph &inputGraph){
         inputGraph.nodeNo = nodeNo;
 }
 
+bool graph::delete_edge(long int node_1, long int node_2){
+    bool validation = false;
+    long int graphSize = matrix.size();
+    if (std::max(node_1 - 1, node_2 - 1)){
+        validation = true;
+        matrix[node_1 - 1][node_2 - 1] = -1;
+        matrix[node_2 - 1][node_1 - 1] = -1;
+    }
+    return validation;
+}
 
 //----------- GRAPH_LINKED_LIST -----------
 graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec){
@@ -146,7 +157,7 @@ graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<l
                 if (i2 == j)
                     generatedGraph.matrix[i2 + decodeValue*(i+1)][j + decodeValue*(i+1)] = 0;
                 else
-                    generatedGraph.matrix[i2 + decodeValue*(i+1)][j + decodeValue*(i+1)] = inputGraph.matrix[i2][j];    
+                    generatedGraph.matrix[i2 + decodeValue*(i+1)][j + decodeValue*(i+1)] = inputGraph.dist(i2+1, j+1);    
             }
         }
 
@@ -156,10 +167,8 @@ graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<l
 
         // Delete edge in new graph
         
-        // printf("prev edge need to be delete: %d -> %d \n", node_1+1, node_2+1);
-        generatedGraph.matrix[node_1 + decodeValue*(i+1)][node_2 + decodeValue*(i+1)] = -1;
-        generatedGraph.matrix[node_2 + decodeValue*(i+1)][node_1 + decodeValue*(i+1)] = -1;
-        
+        printf("prev edge need to be delete: %d -> %d \n", (node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
+        generatedGraph.delete_edge((node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
     }
 }
 

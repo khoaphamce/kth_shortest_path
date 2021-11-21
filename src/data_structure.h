@@ -21,6 +21,7 @@ class graph{
         long int maximum_node();
         void print();
         void copy (graph &inputGraph);
+        bool delete_edge(long int node_1, long int node_2);
         // void mandatory_edges_gen(std::vector<std::vector<long int>> inputEdges);
 
     protected:

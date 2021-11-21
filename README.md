@@ -42,6 +42,10 @@ A program for searching k shortest path
             graph.print()
             ```
             Print graph to terminal (matrix form).
+        -   ```cpp
+            graph.delete_edge(long int node_1, long int node_2)
+            ```
+            Delete edge between 2 nodes.
 
 
 # How to use
