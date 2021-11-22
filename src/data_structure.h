@@ -60,7 +60,7 @@ class path{
         void erase_node(long int node_1);
         void erase_node_pos(long int nodeIndex);
         long int size();
-        long int pop_node(long int node_1);
+        long int pop_node();
         void add_node(long int node_1);
         void add_node(long int node_1, long int pos);
         void print();

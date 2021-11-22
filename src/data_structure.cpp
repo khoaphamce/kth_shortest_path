@@ -240,7 +240,7 @@ long int path::size(){
 }
 
 // pop out node
-long int path::pop_node(long int node_1){
+long int path::pop_node(){
     long int node_poped_out;
     if (nodeVector.size() > 0){
         node_poped_out = nodeVector[nodeVector.size()];
