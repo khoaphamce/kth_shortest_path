@@ -22,6 +22,7 @@ class graph{
         void print();
         void copy (graph &inputGraph);
         bool delete_edge(long int node_1, long int node_2);
+        void clear();
         // void mandatory_edges_gen(std::vector<std::vector<long int>> inputEdges);
 
     protected:
@@ -35,15 +36,40 @@ class graph{
 class graph_linked_list{
     public:
         graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
-        ~graph_linked_list(){};
+        ~graph_linked_list();
         graph generate_graph(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
         std::vector<std::vector<long int>> node_decode(std::vector<std::vector<long int>> inputEdges);
         graph main_graph();
+        void clear();
 
     private:
         graph generatedGraph;
         long int decodeValue; 
 
+};
+
+//--------- CLASS PATH ----------
+class path{
+    public:
+        path();
+        ~path();
+
+        long int node(long int nodeIndex);
+        void erase_node(long int node_1);
+        void erase_node_index(long int nodeIndex);
+        long int size();
+        long int pop_node(long int node_1);
+        long int pop_node_index(long int node_1);
+        long int add_node(long int node_1);
+        long int add_node_in_pos(long int node_1, long int pos);
+        void print();
+        void clear();
+
+
+    protected:
+        std::vector<long int> nodeVector;
+        long int length;
+         
 };
 
 /* ---------------------------------------------------------------------- */

@@ -44,7 +44,8 @@ graph::graph(std::vector<std::vector<long int>> inputMat, long int inputRow){
 
 // destructor
 graph::~graph(){
-    matrix.clear();
+    if (matrix.size() > 0)
+        matrix.clear();
 }
 
 long int graph::maximum_node(){
@@ -112,6 +113,11 @@ bool graph::delete_edge(long int node_1, long int node_2){
     return validation;
 }
 
+void graph::clear(){
+    if (matrix.size() > 0)
+        matrix.clear();
+}
+
 //----------- GRAPH_LINKED_LIST -----------
 graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec){
     inputGraph.copy(generatedGraph);
@@ -127,6 +133,13 @@ graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<l
         long int node_1 = edgesVec[i][0]-1;
         long int node_2 = edgesVec[i][1]-1;
 
+        if ((inputGraph.dist(node_1+1, node_2+1) == -1) && (inputGraph.dist(node_2+1, node_1+1) == -1)){
+            continue;
+        }
+
+        if (std::max(node_1, node_2) > inputGraph.maximum_node()-1){
+            continue;
+        }
         // std::cout << "Done node assign" << std::endl;
 
         // Add row vector
@@ -177,4 +190,8 @@ graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<l
 
 graph graph_linked_list::main_graph(){
     return generatedGraph;
+}
+
+graph_linked_list::~graph_linked_list(){
+    generatedGraph.clear();
 }
