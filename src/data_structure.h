@@ -54,16 +54,18 @@ class path{
         path();
         ~path();
 
+        path(std::vector<long int> nodeVec);
+
         long int node(long int nodeIndex);
         void erase_node(long int node_1);
-        void erase_node_index(long int nodeIndex);
+        void erase_node_pos(long int nodeIndex);
         long int size();
         long int pop_node(long int node_1);
-        long int pop_node_index(long int node_1);
-        long int add_node(long int node_1);
-        long int add_node_in_pos(long int node_1, long int pos);
+        void add_node(long int node_1);
+        void add_node(long int node_1, long int pos);
         void print();
         void clear();
+        long int find_node_pos(long int node_1);
 
 
     protected:

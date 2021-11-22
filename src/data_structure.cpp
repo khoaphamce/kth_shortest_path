@@ -6,6 +6,7 @@
 
 using namespace ds;
 
+//----------------------------- GRAPH -----------------------------
 // Making graph
 
 graph::graph(std::vector<std::vector<long int>> inputMat, long int inputRow){
@@ -118,7 +119,9 @@ void graph::clear(){
         matrix.clear();
 }
 
-//----------- GRAPH_LINKED_LIST -----------
+
+//---------------------- GRAPH_LINKED_LIST ----------------------
+
 graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec){
     inputGraph.copy(generatedGraph);
     
@@ -194,4 +197,90 @@ graph graph_linked_list::main_graph(){
 
 graph_linked_list::~graph_linked_list(){
     generatedGraph.clear();
+}
+
+
+/* ---------------------- PATH ------------------------ */
+
+// Constructor 
+path::path(){
+}
+
+path::path(std::vector<long int> nodeVec){
+    for (int i = 0; i < nodeVec.size(); i++){
+        nodeVector.push_back(nodeVec[i]);
+    }
+}
+
+// Destructor
+path::~path(){
+    nodeVector.clear();
+}
+
+// node
+long int path::node(long int nodeIndex){
+    return nodeIndex;
+}
+
+// erase node
+void path::erase_node(long int node_1){
+    long int node_pos = find_node_pos(node_1);
+    if (node_pos >= 0)
+        erase_node_pos(node_pos);
+}
+
+// erase node position
+void path::erase_node_pos(long int nodeIndex){
+    nodeVector.erase(nodeVector.begin()+nodeIndex);
+}
+
+// Size of path
+long int path::size(){
+    return nodeVector.size();
+}
+
+// pop out node
+long int path::pop_node(long int node_1){
+    long int node_poped_out;
+    if (nodeVector.size() > 0){
+        node_poped_out = nodeVector[nodeVector.size()];
+        nodeVector.pop_back();
+    }
+
+    return node_poped_out;
+}
+
+// add node 
+void path::add_node(long int node_1){
+    nodeVector.push_back(node_1);
+}
+
+// add node with position
+void path::add_node(long int node_1, long int pos){
+    if (nodeVector.size() > 0)
+        nodeVector.insert(nodeVector.begin() + pos, node_1);
+    else
+        nodeVector.push_back(node_1);
+}
+
+// print out path
+void path::print(){
+    for (int i = 0; i < nodeVector.size(); i++){
+        std::cout << nodeVector[i];
+        if (i < nodeVector.size() - 1){
+            std::cout << " -> ";
+        }
+    }
+}
+
+void path::clear(){
+    nodeVector.clear();
+}
+
+// find node pos
+long int path::find_node_pos(long int node_1){
+    for (int i = 0; i < nodeVector.size(); i++){
+        if (nodeVector[i] == node_1) return i;
+    }
+    return -1;
 }

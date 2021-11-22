@@ -25,10 +25,28 @@ void test_func(){
     std::cout << std::endl;
 }
 
+void inoutPath(){
+    int n;
+    std::vector<long int> inputNodes;
+    std::cout << "number of nodes: ";
+    std::cin >> n;
+
+    for (int i = 0; i < n; i++){
+        long int temp;
+        std::cin >> temp;
+        inputNodes.push_back(temp);
+    }
+    std::cout << std::endl;
+    ds::path inputPath(inputNodes);
+    std::cout << "Path that is input:" << std::endl;
+    inputPath.print();
+    std::cout << std::endl;
+}
+
 int main(){
-    test_func();
-    for (int i = 0; i < 2000000000; i++)
-        printf("Bruh %d \n", i);
+    inoutPath();
+    // for (int i = 0; i < 2000000000; i++)
+    //     printf("Bruh %d \n", i);
     
     return 0;
 }
