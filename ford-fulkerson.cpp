@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-
-
+int V;
+int E;
 //vector< vector<int> > capacity(100, vector<int>(100,1000007));
 using namespace std;
 
@@ -10,12 +10,12 @@ vector< vector<int> > create_Matrix(){
 
     vector< vector<int> > Matrix;
     //input vertice
-    int V;
+    
     cout << "input number of vertices: ";
     cin >> V;
 
     //input edge
-    int E;
+    
     cout << "input number of edges: ";
     cin >> E;
     
@@ -36,6 +36,7 @@ vector< vector<int> > create_Matrix(){
     }
     return Matrix;
 }
+
 // A special BFS version that returns true if there's a path from start to end.
 bool check_path(vector< vector<int> > &resMatrix, int &start, int &end, vector<int> &parent){
     //array for all nodes we visited and initialize to all false.
@@ -138,13 +139,22 @@ int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
     return maxflow;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
- 
+void printMatrix(int V){
+    
+}
 int main() {
     cout << "begin\n";
     
     //create matrix
     vector< vector<int> > Matrix = create_Matrix();
-    
+
+    cout <<"print Matrix: " << endl;
+    for (int i = 0; i < V; i++){
+        for (int j = 0; j < V; j++){
+            cout << Matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
     //input start point
     int start;
     cout << "input start: ";
@@ -154,7 +164,7 @@ int main() {
     int end;
     cout << "input end: ";
     cin >> end;
-    
+
     cout << "The max flow from " << start << " to " << end << " is " << FordFulkerson(Matrix, start, end) << endl;
     // for(int i = 0; i < 6; i++){
     //     for(int j = 0; j < 6; j++){
@@ -171,3 +181,14 @@ int main() {
     
     return 0;
 }
+
+// 0 1 15
+// 0 2 12
+// 1 2 9
+// 1 3 11
+// 2 1 5
+// 2 4 13
+// 3 2 9
+// 3 5 25
+// 4 3 8
+// 4 5 6
