@@ -37,9 +37,9 @@ vector< vector<int> > create_Matrix(){
     return Matrix;
 }
 
-// A special BFS version that returns true if there's a path from start to end.
+//function check if there's a path from start to end
 bool check_path(vector< vector<int> > &resMatrix, int &start, int &end, vector<int> &parent){
-    //array for all nodes we visited and initialize to all false.
+    //array for all nodes we visited and initialize to all false
     int n = resMatrix.size();
     bool visited[1000];
     for (int i = 0; i <= n; i++){
@@ -58,14 +58,14 @@ bool check_path(vector< vector<int> > &resMatrix, int &start, int &end, vector<i
         int u = q.front();
         q.pop();
         
-        //check all of u's friends.
+        //check all of u's friends
         for(int i = 0; i < n; i++){
             int v = i;
             int capacity = resMatrix[u][v];
             
-            //find a neighbor that hasn't been visited and the capacity must be bigger than 0.
+            //find a neighbor that hasn't been visited and the capacity must be bigger than 0
             if(visited[v] == false && capacity > 0){
-                //push the neighbor into the queue, mark it's parent, and mark it visited.
+                //push the neighbor into the queue, mark it's parent, and mark it visited
                 q.push(v);
                 parent[v] = u;
                 visited[v] = true;
@@ -73,18 +73,18 @@ bool check_path(vector< vector<int> > &resMatrix, int &start, int &end, vector<i
         }
     }
         
-    //if end is visited, we will have a path to it. 
+    //if end is visited, we will have a path to it 
     if(visited[end] == true) { 
         return true; 
     }
         
     return false;
 }
-//ford-fulkerson algorithm to get the max flow.
+//ford-fulkerson algorithm to get the max flow
 int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
     int maxflow = 0;
     
-    //the residual graph. (Same as the original graph.)
+    //create graph
     vector< vector<int> > resMatrix;
     int n = Matrix.size();
     for(int i = 0; i < n; i++){
@@ -95,7 +95,7 @@ int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
         }
     }
     
-    //create an empty parent array for function check_path to store the augmenting path. 
+    //create an empty parent array for function check_path to store the augmenting path
     vector<int> parent;
     for(int i = 0; i < n; i++){
         parent.push_back(-1);
@@ -103,7 +103,7 @@ int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
     
     //keep calling function check_path to check for an augmenting path (from start to end)
     while(check_path(resMatrix, start, end, parent) == true){
-        //find the max flow through the path we just found.
+        //find the max flow through the path we just found
         int pathflow = 10000007;
         
         //go through the path we just found
@@ -115,25 +115,25 @@ int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
             int capacity = resMatrix[u][v];
             pathflow = min(pathflow, capacity);
             
-            //setup for the next edge in the path.
+            //setup for the next edge in the path
             v = u;
         }
         
-        //update the residual capacities of the edges and reverse edges. 
+        //update the residual capacities of the edges and reverse edges
         v = end;
         while(v != start){
-            int u = parent[v]; //the parent.
+            int u = parent[v]; 
             
-            //update the capacities.
+            //update the capacities
             
             resMatrix[u][v] -= pathflow;
             resMatrix[v][u] += pathflow;
             
-            //setup for the next edge in the path.
+            //setup for the next edge in the path
             v = u;
         }
         
-        //add this path's flow to the total max flow so far.
+        //add this path's flow to the total max flow so far
         maxflow += pathflow;
     }
     return maxflow;
