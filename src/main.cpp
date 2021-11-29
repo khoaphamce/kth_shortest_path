@@ -6,6 +6,7 @@
 #include "data_structure.h"
 #include "algo.h"
 #include "io_func.h"
+#include "dijkstra.h"
 #include <algorithm>
 
 void test_func(){
