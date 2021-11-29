@@ -9,6 +9,7 @@ using namespace std;
 #ifndef dijkstra_h
 #define dijkstra_h
 
+namespace dijkstra {
 #define MAX 100
 const long int  INF = 1e9;
 long int path[MAX];
@@ -19,7 +20,7 @@ struct compare {
     }
 };
 
-vector<long int> Dijkstra(data_structure_h::ds::graph graph, long int start) {
+vector<long int> Dijkstra(ds::graph graph, long int start) {
     vector<vector<pair<long int, long int> > > matrix = graph.makeAdMat();
     priority_queue<pair<long int, long int>, vector<pair<long int, long int> >, compare> pq;
     pq.push(make_pair(start, 0));
@@ -43,12 +44,13 @@ vector<long int> Dijkstra(data_structure_h::ds::graph graph, long int start) {
     return dist;
 }
 
-void makePath(long int des, data_structure_h::ds::path *dpath) {
+void makePath(long int des, ds::path *dpath) {
     if(path[des] == -1) {
         return;
     }
     makePath(path[des], dpath);
     dpath->add_node(des);
+}
 }
 
 #endif

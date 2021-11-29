@@ -45,9 +45,24 @@ void inoutPath(){
 }
 
 int main(){
-    inoutPath();
+    //inoutPath();
     // for (int i = 0; i < 2000000000; i++)
     //     printf("Bruh %d \n", i);
-    
+    int row;
+    cin >> row;
+    long int d = 0;
+    vector<vector<long int> > input(row, vector<long int> ());
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < 3; j++) {
+            cin >> d;
+            input[i].push_back(d);
+        }
+    }
+    ds::graph graph(input, row);
+    vector<long int> distance = dijkstra::Dijkstra(graph, 0);
+    cout << distance[2];
+    ds::path *dpath = new ds::path();
+    dijkstra::makePath(2, dpath);
+    dpath->print();
     return 0;
 }
