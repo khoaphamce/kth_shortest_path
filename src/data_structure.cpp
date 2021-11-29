@@ -119,6 +119,15 @@ void graph::clear(){
         matrix.clear();
 }
 
+std::vector<std::vector<std::pair<long int, long int> > > graph::makeAdMat() {
+    std::vector<std::vector<std::pair<long int, long int> > > adjacencyMatrix(this->nodeNo, std::vector<std::pair<long int, long int> > (this->nodeNo, std::pair<long int, long int> ()));
+    for(int i = 0; i < this->matrix.size(); i++) {
+        long int s = matrix[i][0], d = matrix[i][1], w = matrix[i][2];
+        adjacencyMatrix[s][d] = std::make_pair(d, w);
+    }
+    return adjacencyMatrix;
+}
+
 
 //---------------------- GRAPH_LINKED_LIST ----------------------
 

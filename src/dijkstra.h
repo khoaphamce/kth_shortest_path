@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 //--------DIJKSTRA'S ALGORITHM--------
@@ -10,7 +11,7 @@ using namespace std;
 
 #define MAX 100
 const long int  INF = 1e9;
-vector<long int> dist(MAX, INF);
+long int path[MAX];
 
 struct compare {
     bool operator() (const pair<long int, long int> a, const pair<long int, long int> b) const {
@@ -18,21 +19,36 @@ struct compare {
     }
 };
 
-void Dijkstra(data_structure_h::ds::graph *graph, long int start) {
-    vector<vector<long int> > matrix = graph->getMat();
+vector<long int> Dijkstra(data_structure_h::ds::graph graph, long int start) {
+    vector<vector<pair<long int, long int> > > matrix = graph.makeAdMat();
     priority_queue<pair<long int, long int>, vector<pair<long int, long int> >, compare> pq;
     pq.push(make_pair(start, 0));
+    vector<long int> dist(matrix.size(), INF);
     dist[start] = 0;
+    fill_n(path, matrix.size(), -1);
     while(!pq.empty()) {
         pair<long int, long int> top = pq.top();
         pq.pop();
         long int vertice = top.first;
         long int weight = top.second;
         for(long int i = 0; i < matrix[vertice].size(); i++) {
-            long int neighbor = matrix[vertice][i];
-
+            pair<long int, long int> neighbor = matrix[vertice][i];
+            if(weight + neighbor.second < dist[neighbor.first]) {
+                dist[neighbor.first] = weight = neighbor.second;
+                pq.push(pair<long int, long int>(neighbor.first, dist[neighbor.first]));
+                path[neighbor.first] = vertice;
+            }
         }
     }
+    return dist;
+}
+
+void makePath(long int des, data_structure_h::ds::path *dpath) {
+    if(path[des] == -1) {
+        return;
+    }
+    makePath(path[des], dpath);
+    dpath->add_node(des);
 }
 
 #endif
