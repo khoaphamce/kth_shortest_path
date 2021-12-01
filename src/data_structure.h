@@ -23,7 +23,6 @@ class graph{
         void copy (graph &inputGraph);
         bool delete_edge(long int node_1, long int node_2);
         void clear();
-        std::vector<std::vector<std::pair<long int, long int> > > makeAdMat();
         // void mandatory_edges_gen(std::vector<std::vector<long int>> inputEdges);
 
     protected:
