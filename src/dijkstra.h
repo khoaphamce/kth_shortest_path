@@ -22,7 +22,9 @@ struct compare {
     }
 };
 
-void Dijkstra(vector<vector<long int> > matrix, long int start) {
+void Dijkstra(ds::graph graph, long int start) {
+    vector<vector<long int> > matrix = graph.graph_matrix();
+    long int nodeNo = graph.maximum_node();
     priority_queue<pair<long int, long int>, vector<pair<long int, long int> >, compare> pq;
     dist[start] = 0;
     fill_n(path, MAX, -1);
@@ -32,19 +34,12 @@ void Dijkstra(vector<vector<long int> > matrix, long int start) {
         long int vertice = top.first;
         long int weight = top.second;
         pq.pop();
-        for(int i = 0; i < matrix.size(); i++) {
-            if(vertice == matrix[i][0]) {
-                if(weight + matrix[i][2] < dist[matrix[i][1]]) {
-                    dist[matrix[i][1]] = weight + matrix[i][2];
-                    pq.push(pair<int, int>(matrix[i][1], dist[matrix[i][1]]));
-                    path[matrix[i][1]] = vertice;
-                }
-            }
-            else if(vertice == matrix[i][1]) {
-                if(weight + matrix[i][2] < dist[matrix[i][0]]) {
-                    dist[matrix[i][0]] = weight + matrix[i][2];
-                    pq.push(pair<int, int>(matrix[i][0], dist[matrix[i][0]]));
-                    path[matrix[i][0]] = vertice;
+        for(long int i = 0; i < nodeNo; i++) {
+            if(matrix[vertice - 1][i] != -1) {
+                if(weight + matrix[vertice - 1][i] < dist[i + 1]) {
+                    dist[i + 1] = weight + matrix[vertice - 1][i];
+                    pq.push(pair<long int, long int>(i + 1, dist[i + 1]));
+                    path[i + 1] = vertice;
                 }
             }
         }

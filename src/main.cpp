@@ -57,7 +57,8 @@ int main(){
             cin >> matrix[i][j];
         }
     }
-    dijkstra::Dijkstra(matrix, s);
+    ds::graph graph(matrix, n);
+    dijkstra::Dijkstra(graph, s);
     cout << "The distance between " << s << " and " << e << ": " <<dijkstra::dist[e] << endl;
     dijkstra::makePath(e);
     cout << "The path from " << s << " to " << e << ": ";

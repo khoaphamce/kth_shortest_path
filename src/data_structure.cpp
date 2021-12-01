@@ -119,6 +119,10 @@ void graph::clear(){
         matrix.clear();
 }
 
+std::vector<std::vector<long int> > graph::graph_matrix() {
+    return this->matrix;
+}
+
 //---------------------- GRAPH_LINKED_LIST ----------------------
 
 graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec){
