@@ -32,23 +32,6 @@ class graph{
         long int nodeNo;
         std::vector<std::vector<long int>> matrix; 
 };
-
-//------- CLASS LINKED LIST DATA TYPE ------
-class graph_linked_list{
-    public:
-        graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
-        ~graph_linked_list();
-        graph generate_graph(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
-        std::vector<std::vector<long int>> node_decode(std::vector<std::vector<long int>> inputEdges);
-        graph main_graph();
-        void clear();
-
-    private:
-        graph generatedGraph;
-        long int decodeValue; 
-
-};
-
 //--------- CLASS PATH ----------
 class path{
     public:
@@ -74,6 +57,26 @@ class path{
         long int length;
          
 };
+
+//------- CLASS LINKED LIST DATA TYPE ------
+class graph_linked_list{
+    public:
+        graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
+        ~graph_linked_list();
+        // graph generate_graph(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
+        std::vector<std::vector<long int>> node_decode(std::vector<std::vector<long int>> inputEdges);
+        graph main_graph();
+        long int encodeNode(long int inputNode);
+        long int decodeNode(long int inputNode);
+        path decodePath(path inputPath);
+        void clear();
+
+    private:
+        graph generatedGraph;
+        long int decodeValue; 
+
+};
+
 
 /* ---------------------------------------------------------------------- */
 }

@@ -1,4 +1,18 @@
-set(APP_SOURCE_FILES main.cpp algo.h data_structure.h data_structure.cpp io_func.h math_algo.h)
+set(APP_SOURCE_FILES 
+main.cpp 
+algo.h 
+algo.cpp 
+data_structure.h 
+data_structure.cpp 
+dijkstra.h 
+dijkstra.cpp 
+io_func.h 
+io_func.cpp 
+math_algo.h 
+math_algo.cpp 
+mandatory_edge.h 
+mandatory_edge.cpp
+)
 
 #if(WIN32)
 #   set(FORTY_SOURCE_FILES ${APP_SOURCE_FILES} sample.rc)

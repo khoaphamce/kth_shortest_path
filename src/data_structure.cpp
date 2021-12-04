@@ -202,7 +202,28 @@ graph_linked_list::~graph_linked_list(){
     generatedGraph.clear();
 }
 
+long int graph_linked_list::encodeNode(long int inputNode){
+    return inputNode+decodeValue;
+}
 
+long int graph_linked_list::decodeNode(long int inputNode){
+    if (inputNode >= decodeValue)
+        return inputNode-decodeValue;
+    else
+        return inputNode;
+}
+
+path graph_linked_list::decodePath(path inputPath){
+    // printf("decode value: %d \n", decodeValue);
+    // std::cout << "Input path: " << std::endl;
+    // inputPath.print();
+    path returnPath;
+    for(int i = 0; i < inputPath.size(); i++){
+        // printf("input node: %d \n", inputPath.node(i));
+        returnPath.add_node(decodeNode(inputPath.node(i)));
+    }
+    return returnPath;
+}
 /* ---------------------- PATH ------------------------ */
 
 // Constructor 
@@ -222,7 +243,7 @@ path::~path(){
 
 // node
 long int path::node(long int nodeIndex){
-    return nodeIndex;
+    return nodeVector[nodeIndex];
 }
 
 // erase node
