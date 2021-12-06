@@ -1,0 +1,52 @@
+################################
+# Type 0 for mandatory edges   #
+# Type 1 for kth shortest path #
+################################
+
+Your choice: 0
+
+---------- FIND PATH WITH MANDATORY EDGES ----------
+number of edges: 8
+Type in nodes and edges: 
+1 2 3
+2 3 6
+3 4 8
+4 5 9
+5 6 1
+1 6 9
+2 6 10
+3 5 7
+number of mandatory edges: 3
+Type in mandatory edges: 
+1 6
+2 3
+5 4
+input source and finish node: 1 4
+1 -> 6 -> 2 -> 3 -> 5 -> 4
+
+Done finding path, type in your choice again:
+Your choice: 1
+
+-------- KTH SHORTEST PATH --------
+number of edges: 8
+Type in nodes and edges: 
+1 2 3
+2 3 6
+3 4 8
+4 5 9
+5 6 1
+1 6 9
+2 6 10
+3 5 7
+input source and finish node: 1 4
+input K: 4
+Done finding path
+1 -> 2 -> 3 -> 4
+1 -> 6 -> 5 -> 4
+1 -> 6 -> 2 -> 3 -> 4
+1 -> 2 -> 6 -> 5 -> 4
+
+Done finding path, type in your choice again:
+Your choice: 2
+
+EXITING PROGRAM...
