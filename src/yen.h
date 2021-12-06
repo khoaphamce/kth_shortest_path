@@ -21,6 +21,7 @@ class yenObject{
     public:
         yenObject();
         yenObject(ds::graph inGraph);
+        ~yenObject();
         void makePath(long int sourceNode, long int finishNode, long int K);
         ds::path path(long int kth);
         std::vector<ds::path> getPathList();

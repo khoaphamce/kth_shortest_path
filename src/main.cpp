@@ -30,6 +30,9 @@
 // }
 
 void test_mand_edge(){
+    std::cout << std::endl;
+    std::cout << "---------- FIND PATH WITH MANDATORY EDGES ----------" << std::endl;
+
     ds::graph inputGraph = io_func::input_graph();
 
     std::vector<std::vector<long int>> mandEdges = io_func::input_mand_edges();
@@ -37,12 +40,6 @@ void test_mand_edge(){
     long int source, finish;
     std::cout << "input source and finish node: ";
     std::cin >> source >> finish;
-
-    // mand_edge::mand_edge_path * mandObject = new mand_edge::mand_edge_path(
-    //                                                 inputGraph, 
-    //                                                 mandEdges, 
-    //                                                 source, 
-    //                                                 finish);
     mand_edge::mand_edge_path mandObject(
                             inputGraph, 
                             mandEdges, 
@@ -56,6 +53,7 @@ void test_mand_edge(){
 }
 
 void inoutPath(){
+    std::cout << std::endl;
     int n;
     std::vector<long int> inputNodes;
     std::cout << "number of nodes: ";
@@ -74,7 +72,7 @@ void inoutPath(){
 }
 
 void test_yen(){
-    std::cout << "------ TESTING YEN'S ------" << std::endl;
+    std::cout << "-------- KTH SHORTEST PATH --------" << std::endl;
 
     ds::graph inputGraph = io_func::input_graph();
     
@@ -101,25 +99,30 @@ void test_yen(){
 }
 
 int main(){
-    //inoutPath();
-    // for (int i = 0; i < 2000000000; i++)
-    //     printf("Bruh %d \n", i);
+    int choice;
+    std::cout << "------- PATH FINDING PROGRAM -------" << std::endl << std::endl;
+    std::cout << "################################" << std::endl;
+    std::cout << "# Type 0 for mandatory edges   #" << std::endl;
+    std::cout << "# Type 1 for kth shortest path #" << std::endl;
+    std::cout << "################################" << std::endl << std::endl;
+    std::cout << "Your choice: ";
+    std::cin >> choice;
 
-    // long int n;
-    // long int s = 1, e = 2;
-    // cin >> n;
-    // vector<vector<long int> > matrix = vector<vector<long int> >(n, vector<long int>(3));
-    // for(long int i = 0; i < n; i++) {
-    //     for(long int j = 0; j < 3; j++) {
-    //         cin >> matrix[i][j];
-    //     }
-    // }
-    // ds::graph graph(matrix, n);
-    // dijkstra::Dijkstra(graph, s);
-    // cout << "The distance between " << s << " and " << e << ": " <<dijkstra::dist[e] << endl;
-    // dijkstra::makePath(e);
-    // cout << "The path from " << s << " to " << e << ": ";
-    // dijkstra::dPath->print();
-    test_yen();
+    while(choice == 1 || choice == 0){
+        if (choice == 0)
+            test_mand_edge();
+        if (choice == 1)
+            test_yen();
+
+        std::cout << std::endl;
+        std::cout << "Done finding path, type in your choice again:" << std::endl;
+
+        std::cout << "Your choice: ";
+        std::cin >> choice;
+    }
+
+    std::cout << std::endl;
+    std::cout << "EXITING PROGRAM..." << std::endl;
+
     return 0;
 }

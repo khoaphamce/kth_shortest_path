@@ -1,7 +1,7 @@
 #include "io_func.h"
 
 ds::graph io_func::input_graph(){
-    std::cout << "number of row: ";
+    std::cout << "number of edges: ";
     long int n;
     std::cin >> n;
     

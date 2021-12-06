@@ -185,21 +185,36 @@ graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<l
         // Make new graph has default value
         for (int i2 = 0; i2 < decodeValue; i2++){
             for (int j = 0; j < decodeValue; j++){
-                if (i2 == j)
-                    generatedGraph.matrix[i2 + decodeValue*(i+1)][j + decodeValue*(i+1)] = 0;
-                else
-                    generatedGraph.matrix[i2 + decodeValue*(i+1)][j + decodeValue*(i+1)] = inputGraph.dist(i2+1, j+1);    
+                if (i2 == j){
+                    generatedGraph.matrix[encodeNode(i2,i+2)][encodeNode(j,i+2)] = 0;
+                    // generatedGraph.matrix[encodeNode(j,i+2)][encodeNode(i2,i+2)] = 0;
+                }
+                else{
+                    // generatedGraph.matrix[encodeNode(j,i+2)][encodeNode(i2,i+2)] = inputGraph.dist(i2+1, j+1); 
+                    generatedGraph.matrix[encodeNode(i2,i+2)][encodeNode(j,i+2)] = inputGraph.dist(j+1, i2+1);
+                }   
+                // printf("set matrix[%d][%d] = %d \n", encodeNode(i2,i+2), encodeNode(j,i+2), generatedGraph.matrix[encodeNode(i2,i+2)][encodeNode(j,i+2)]);
             }
         }
 
-        // Link old graph to new graph
-        generatedGraph.matrix[node_1][node_2 + decodeValue*(i+1)] = inputGraph.matrix[node_1][node_2];
-        generatedGraph.matrix[node_2][node_1 + decodeValue*(i+1)] = inputGraph.matrix[node_2][node_1];
+        // Delete edge in old graph
+        // for(int i2 = 0; i2 < generatedGraph.maximum_node(); i2++){
+        //     generatedGraph.matrix[i2][encodeNode(node_1+1, i+1)] = -1;
+        //     generatedGraph.matrix[encodeNode(node_1+1, i+1)][i2] = -1;
+        //     // generatedGraph.delete_edge(i2+1, node_2+1);
+        // }
 
-        // Delete edge in new graph
-        
+        // Link old graph to new graph
+        generatedGraph.matrix[encodeNode(node_1, i+1)][encodeNode(node_2, i+2)] = inputGraph.matrix[node_1][node_2];
+        generatedGraph.matrix[encodeNode(node_2, i+2)][encodeNode(node_1, i+1)] = inputGraph.matrix[node_2][node_1];
+        // std::cout << "linking graph:" << std::endl;
+        // printf("[%d][%d] = [%d][%d] = %d \n", node_1+1, encodeNode(node_2, i+2)+1, node_1+1, node_2+1, generatedGraph.matrix[node_1][encodeNode(node_2, i+2)]);
+        // printf("[%d][%d] = [%d][%d] = %d \n", node_2+1, encodeNode(node_1, i+2)+1, node_2+1, node_1+1, generatedGraph.matrix[node_2][encodeNode(node_1, i+2)]);
+
+        // Delete edge in new and old graph
         // printf("prev edge need to be delete: %d -> %d \n", (node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
-        generatedGraph.delete_edge((node_1+1)+decodeValue*(i+1), (node_2+1)+decodeValue*(i+1));
+        generatedGraph.delete_edge(encodeNode(node_1+1, i+1), encodeNode(node_2+1, i+1));
+        generatedGraph.delete_edge(encodeNode(node_1+1, i+2), encodeNode(node_2+1, i+2));
     }
 }
 
@@ -213,7 +228,9 @@ graph_linked_list::~graph_linked_list(){
 }
 
 long int graph_linked_list::encodeNode(long int inputNode, long int graphIndex){
-    return inputNode+(decodeValue*(graphIndex-1));
+    long int returnVal = inputNode+(decodeValue*(graphIndex-1));
+    // printf("encode %d to %d \n", inputNode, returnVal);
+    return returnVal;
 }
 
 long int graph_linked_list::decodeNode(long int inputNode){
@@ -221,8 +238,8 @@ long int graph_linked_list::decodeNode(long int inputNode){
     //     return inputNode-decodeValue;
     // else
     //     return inputNode;
-
-    return decodeValue - int(inputNode/decodeValue)*decodeValue;
+    if ((inputNode % decodeValue == 0) && (inputNode >= decodeValue)) return decodeValue;
+    return inputNode - int(inputNode/decodeValue)*decodeValue;
 }
 
 path graph_linked_list::decodePath(path inputPath){
@@ -383,4 +400,22 @@ long int path::getDist(){
 
 void path::setDist(long int new_dist){
    dist = new_dist; 
+}
+
+long int path::loopEnd(){
+    long int endAt = -1;
+    for (int i = 0; i < nodeVector.size()-1; i++){
+        bool flag = false;
+        for (int j = i+1; j < nodeVector.size(); j++){
+            long int addIndex = 0;
+            while ((nodeVector[i+addIndex] == nodeVector[j+addIndex]) && (j+addIndex < nodeVector.size())){
+                flag = true;
+                endAt = i+addIndex;
+                addIndex++;
+            }
+            if (flag) break;
+        }
+        if (flag) break;
+    }
+    return endAt;
 }

@@ -70,6 +70,7 @@ class path{
         path merge(path &inPath, bool flag, long int add_dist = 0);
         long int getDist();
         void setDist(long int new_dist);
+        long int loopEnd();
 
 
     protected:

@@ -4,7 +4,7 @@
 std::vector<std::vector<std::vector<long int>>> algo::edges_order_perm(std::vector<std::vector<long int>> edgesVec){
     long int edgesNo = edgesVec.size();
     long int totalComb = math_algo::factorial(edgesNo);
-    std::cout << std::endl << "Total permutation: " << totalComb << std::endl;
+    // std::cout << std::endl << "Total permutation: " << totalComb << std::endl;
     std::vector<std::vector<std::vector<long int>>> returnEdges(totalComb, std::vector<std::vector<long int>>(edgesNo, std::vector<long int>(2)));
     
     std::vector<long int> orderVec(edgesVec.size());
