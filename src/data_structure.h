@@ -3,10 +3,20 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+// #include "yen.h"
+// #include "dijkstra.h"
 
 // ------- GRAPH DATA TYPE --------
 #ifndef data_structure_h
 #define data_structure_h
+
+// namespace ds
+// {
+//     class graph;
+//     class path;
+//     class graph_linked_list;
+// }
+// #endif
 
 namespace ds
 {
@@ -23,11 +33,15 @@ class graph{
         void copy (graph &inputGraph);
         bool delete_edge(long int node_1, long int node_2);
         void clear();
-        std::vector<std::vector<long int> > graph_matrix();
+        std::vector<std::vector<long int>> graph_matrix();
+        void delete_node(long int node);
         // void mandatory_edges_gen(std::vector<std::vector<long int>> inputEdges);
 
     protected:
         friend class graph_linked_list;
+        friend class yenObject;
+        friend class DijkstraObject;
+
         bool validGraph;
         long int nodeNo;
         std::vector<std::vector<long int>> matrix; 
@@ -50,11 +64,21 @@ class path{
         void print();
         void clear();
         long int find_node_pos(long int node_1);
+        void copy(path &inPath);
+        void copy(path &inPath, long int start, long int end);
+        bool compare(path &inPath);
+        path merge(path &inPath, bool flag, long int add_dist = 0);
+        long int getDist();
+        void setDist(long int new_dist);
 
 
     protected:
+        friend class yenObject;
+        friend class DijkstraObject;
+
         std::vector<long int> nodeVector;
         long int length;
+        long int dist;
          
 };
 
@@ -66,20 +90,24 @@ class graph_linked_list{
         // graph generate_graph(graph inputGraph, std::vector<std::vector<long int>> edgesVec);
         std::vector<std::vector<long int>> node_decode(std::vector<std::vector<long int>> inputEdges);
         graph main_graph();
-        long int encodeNode(long int inputNode);
         long int decodeNode(long int inputNode);
         path decodePath(path inputPath);
+        long int encodeNode(long int inputNode, long int graphIndex);
         void clear();
 
     private:
+        friend class yenObject;
+        friend class DijkstraObject;
+
         graph generatedGraph;
-        long int decodeValue; 
+        long int decodeValue;
 
 };
-
+}
+#endif
 
 /* ---------------------------------------------------------------------- */
-}
+
 
 // // Making graph
 // graph::graph(std::vector<std::vector<long int>> inputMat, long int inputRow){
@@ -246,4 +274,3 @@ class graph_linked_list{
 
 // }
 
-#endif

@@ -8,6 +8,7 @@
 #include "io_func.h"
 #include "dijkstra.h"
 #include "mandatory_edge.h"
+#include "yen.h"
 #include <algorithm>
 
 
@@ -72,6 +73,33 @@ void inoutPath(){
     std::cout << std::endl;
 }
 
+void test_yen(){
+    std::cout << "------ TESTING YEN'S ------" << std::endl;
+
+    ds::graph inputGraph = io_func::input_graph();
+    
+    long int source, finish;
+    std::cout << "input source and finish node: ";
+    std::cin >> source >> finish;
+
+    long int K;
+    std::cout << "input K: ";
+    std::cin >> K;
+
+    yen::yenObject yen_object(inputGraph);
+    yen_object.makePath(source, finish, K);
+
+    std::vector<ds::path> my_path_list = yen_object.getPathList();
+
+    std::cout << "Done finding path" << std::endl;
+
+    for (int i = 0; i < my_path_list.size(); i++){
+        my_path_list[i].print();
+        std::cout << std::endl;
+    }
+
+}
+
 int main(){
     //inoutPath();
     // for (int i = 0; i < 2000000000; i++)
@@ -92,6 +120,6 @@ int main(){
     // dijkstra::makePath(e);
     // cout << "The path from " << s << " to " << e << ": ";
     // dijkstra::dPath->print();
-    test_mand_edge();
+    test_yen();
     return 0;
 }

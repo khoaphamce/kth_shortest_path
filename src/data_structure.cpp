@@ -123,6 +123,15 @@ std::vector<std::vector<long int> > graph::graph_matrix() {
     return this->matrix;
 }
 
+void graph::delete_node(long int node){
+    for (int i = 0; i < matrix.size(); i++){
+        matrix[i][node-1] = -1;
+        matrix[node-1][i] = -1;
+        matrix[node-1][node-1] = -1;
+    }
+}
+
+
 //---------------------- GRAPH_LINKED_LIST ----------------------
 
 graph_linked_list::graph_linked_list(graph inputGraph, std::vector<std::vector<long int>> edgesVec){
@@ -199,18 +208,21 @@ graph graph_linked_list::main_graph(){
 }
 
 graph_linked_list::~graph_linked_list(){
-    generatedGraph.clear();
+    if (generatedGraph.maximum_node() > 0)
+        generatedGraph.clear();
 }
 
-long int graph_linked_list::encodeNode(long int inputNode){
-    return inputNode+decodeValue;
+long int graph_linked_list::encodeNode(long int inputNode, long int graphIndex){
+    return inputNode+(decodeValue*(graphIndex-1));
 }
 
 long int graph_linked_list::decodeNode(long int inputNode){
-    if (inputNode >= decodeValue)
-        return inputNode-decodeValue;
-    else
-        return inputNode;
+    // if (inputNode >= decodeValue)
+    //     return inputNode-decodeValue;
+    // else
+    //     return inputNode;
+
+    return decodeValue - int(inputNode/decodeValue)*decodeValue;
 }
 
 path graph_linked_list::decodePath(path inputPath){
@@ -238,7 +250,8 @@ path::path(std::vector<long int> nodeVec){
 
 // Destructor
 path::~path(){
-    nodeVector.clear();
+    if (nodeVector.size() > 0)
+        nodeVector.clear();
 }
 
 // node
@@ -307,4 +320,67 @@ long int path::find_node_pos(long int node_1){
         if (nodeVector[i] == node_1) return i;
     }
     return -1;
+}
+
+void path::copy(path &inPath){
+    inPath.nodeVector = nodeVector;
+}
+
+void path::copy(path &inPath, long int start, long int end){
+    if (inPath.nodeVector.size() > 0){
+        inPath.nodeVector.clear();
+    }
+    std::vector<long int> tempVec(nodeVector.begin()+start, nodeVector.begin()+end);
+    inPath.nodeVector = tempVec; 
+}
+
+bool path::compare(path &inPath){
+    if (inPath.nodeVector.size() != nodeVector.size())
+        return false;
+
+    bool flag = true;
+    
+    for (int i = 0; i < inPath.nodeVector.size() && flag == true; i++){
+        if (inPath.nodeVector[i] != nodeVector[i])
+            flag = false;
+    }
+
+    return flag;
+}
+
+path path::merge(path &inPath, bool flag, long int add_dist){
+    path * new_path;
+
+    if (flag == true)
+        new_path = this;
+    else{ 
+        new_path = new path;
+        new_path->nodeVector.assign(this->nodeVector.begin(), this->nodeVector.end());
+    }
+
+    // std::cout << "Done assign original vector" << std::endl;
+
+    if ((new_path->size() > 0) && (inPath.size() > 0)){
+        if (new_path->nodeVector[new_path->nodeVector.size()-1] == inPath.nodeVector[0]){
+            new_path->nodeVector.pop_back();    
+        }
+    }
+
+    // std::cout << "Done poping vector" << std::endl;
+
+    new_path->nodeVector.insert(new_path->nodeVector.end(), inPath.nodeVector.begin(), inPath.nodeVector.end());
+    // std::cout << "Done adding into vector" << std::endl;
+
+    new_path->setDist(new_path->getDist() + inPath.getDist());
+    // std::cout << "Done making new dist" << std::endl;
+
+    return * new_path;
+}
+
+long int path::getDist(){
+    return dist;
+}
+
+void path::setDist(long int new_dist){
+   dist = new_dist; 
 }

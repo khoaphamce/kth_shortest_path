@@ -13,7 +13,7 @@ mand_edge_path::mand_edge_path(ds::graph inputGraph, std::vector<std::vector<lon
                                                 (inputGraph, edgesPermVec[i]);
         ds::graph * new_graph = new ds::graph();
         *new_graph = new_graph_list->main_graph();
-        long int encode_node = new_graph_list->encodeNode(finishNode);
+        long int encode_node = new_graph_list->encodeNode(finishNode, edgesPermVec[i].size());
         
         ds::path new_path;
 

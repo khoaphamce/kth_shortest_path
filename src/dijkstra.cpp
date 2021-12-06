@@ -38,4 +38,5 @@ void  DijkstraObject::makePath(long int des) {
     }
     makePath(path[des]);
     dPath.add_node(des);
+    dPath.setDist(dist[des]);
 }

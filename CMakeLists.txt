@@ -17,6 +17,8 @@ set(APP_SOURCE_FILES
     src/dijkstra.cpp 
     src/io_func.h 
     src/io_func.cpp 
+    src/yen.h
+    src/yen.cpp
     src/math_algo.h 
     src/math_algo.cpp 
     src/mandatory_edge.h 
