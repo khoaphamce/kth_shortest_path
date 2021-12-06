@@ -16,15 +16,15 @@ void DijkstraObject::Dijkstra(ds::graph graph, long int start) {
     pq.push(make_pair(start, 0));
     while(!pq.empty()) {
         pair<long int, long int> top = pq.top();
-        long int vertice = top.first;
+        long int vertex = top.first;
         long int weight = top.second;
         pq.pop();
         for(long int i = 0; i < nodeNo; i++) {
-            if(matrix[vertice - 1][i] != -1) {
-                if(weight + matrix[vertice - 1][i] < dist[i + 1]) {
-                    dist[i + 1] = weight + matrix[vertice - 1][i];
+            if(matrix[vertex - 1][i] != -1) {
+                if(weight + matrix[vertex - 1][i] < dist[i + 1]) {
+                    dist[i + 1] = weight + matrix[vertex - 1][i];
                     pq.push(pair<long int, long int>(i + 1, dist[i + 1]));
-                    path[i + 1] = vertice;
+                    path[i + 1] = vertex;
                 }
             }
         }
