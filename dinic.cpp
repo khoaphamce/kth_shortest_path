@@ -23,6 +23,11 @@ void createGraph(vector< vector<Edge> >& resGraph)
     {
         vector<Edge> row;
         resGraph.push_back(row);
+        for(int j = 0; j < vertices; j++)
+        {
+            Edge e = {-1,-1,-1,-1};      //assign all edges start from all vertices -1
+            resGraph[i].push_back(e);
+        }
     }
 }
 
@@ -32,8 +37,8 @@ void addEdge(int u, int v, int cap)
     Edge a = {v, 0, cap, resGraph[v].size()}; //Forward edge from u to v
     Edge b = {u, 0, 0, resGraph[u].size()}; // Reverse edge from v to u with 0 capacity
                                             //and negative flow
-    resGraph[u].push_back(a); //add forward to the u vertex
-    resGraph[v].push_back(b); //add reverse to the v vertex
+    resGraph[u][a.v] = a; //add forward to the u vertex
+    resGraph[v][b.v] = b; //add reverse to the v vertex
 }
 //Assign Level by using breadth first search algorithm
 bool labelLevelBFS(int s, int t)
@@ -143,6 +148,16 @@ int main()
         cout << "Input u, v, capacity respectively: " << endl;
         cin >> u >> v >> cap;
         addEdge(u,v,cap);
+    }
+    cout << "The matrix is generated from the graph: " << endl;
+    //Print matrix
+    for(int i = 0; i < vertices; i++)
+    {
+        for(int j = 0; j < vertices; j++)
+        {
+            cout << resGraph[i][j].cap << " ";
+        }
+        cout << endl;
     }
     int source, sink;
     cout << "Input source vertex: "; cin >> source;
