@@ -3,19 +3,17 @@
 #include <queue>
 int V;
 int E;
-//vector< vector<int> > capacity(100, vector<int>(100,1000007));
 using namespace std;
 
 vector< vector<int> > create_Matrix(){
 
     vector< vector<int> > Matrix;
+
     //input vertice
-    
     cout << "input number of vertices: ";
     cin >> V;
 
     //input edge
-    
     cout << "input number of edges: ";
     cin >> E;
     
@@ -30,8 +28,11 @@ vector< vector<int> > create_Matrix(){
     for (int i = 0; i < E; i++){
         int u, v, cap;
         cout << "input edge list" << endl;
+        //u: start point
+        //v: end point
+        //cap: capacity transmission
         cin >> u >> v >> cap;
-        //capacity transmission
+        //update capacity transmission, otherwise it will be 0
         Matrix[u][v] = cap;
     }
     return Matrix;
@@ -80,11 +81,12 @@ bool check_path(vector< vector<int> > &resMatrix, int &start, int &end, vector<i
         
     return false;
 }
+
 //ford-fulkerson algorithm to get the max flow
 int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
     int maxflow = 0;
     
-    //create graph
+    //create residual graph, which is same of the original graph
     vector< vector<int> > resMatrix;
     int n = Matrix.size();
     for(int i = 0; i < n; i++){
@@ -133,36 +135,34 @@ int FordFulkerson(vector< vector<int> > &Matrix, int &start, int &end){
             v = u;
         }
         
-        //add this path's flow to the total max flow so far
+        //add this path's flow to the total max flow 
         maxflow += pathflow;
     }
     return maxflow;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
-void printMatrix(int V){
-    
-}
+
 int main() {
-    cout << "begin\n";
+    cout << "Begin Ford-Fulkerson Algorithm\n";
     
     //create matrix
     vector< vector<int> > Matrix = create_Matrix();
 
-    cout <<"print Matrix: " << endl;
-    for (int i = 0; i < V; i++){
-        for (int j = 0; j < V; j++){
-            cout << Matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
+    // cout <<"print Matrix: " << endl;
+    // for (int i = 0; i < V; i++){
+    //     for (int j = 0; j < V; j++){
+    //         cout << Matrix[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
     //input start point
     int start;
-    cout << "input start: ";
+    cout << "input start point: ";
     cin >> start;
 
     //input end point
     int end;
-    cout << "input end: ";
+    cout << "input end point: ";
     cin >> end;
 
     cout << "The max flow from " << start << " to " << end << " is " << FordFulkerson(Matrix, start, end) << endl;
@@ -177,7 +177,6 @@ int main() {
     //     cout << endl;
     // }
     
-    cout << "done\n";
     
     return 0;
 }
