@@ -27,7 +27,7 @@ vector< vector<int> > create_Matrix(){
     }
     for (int i = 0; i < E; i++){
         int u, v, cap;
-        cout << "input edge list" << endl;
+        cout << "Input edge list:" << endl;
         //u: start point
         //v: end point
         //cap: capacity transmission
@@ -148,21 +148,21 @@ int main() {
     //create matrix
     vector< vector<int> > Matrix = create_Matrix();
 
-    // cout <<"print Matrix: " << endl;
-    // for (int i = 0; i < V; i++){
-    //     for (int j = 0; j < V; j++){
-    //         cout << Matrix[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
+    cout <<"Print Matrix: " << endl;
+    for (int i = 0; i < V; i++){
+        for (int j = 0; j < V; j++){
+            cout << Matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
     //input start point
     int start;
-    cout << "input start point: ";
+    cout << "Input start point: ";
     cin >> start;
 
     //input end point
     int end;
-    cout << "input end point: ";
+    cout << "Input end point: ";
     cin >> end;
 
     cout << "The max flow from " << start << " to " << end << " is " << FordFulkerson(Matrix, start, end) << endl;
