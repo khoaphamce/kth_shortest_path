@@ -18,7 +18,7 @@ void InitializeMatrix(int** matrix, int n)
     {
         for(int j = 0; j < n; j++)
         {
-            matrix[i][j] = -1;
+            matrix[i][j] = -1; //-1 is an unrealistic edge
         }
     }
 }
@@ -180,7 +180,7 @@ int main()
         cin >> u >> v >> cap;
         g.addEdge(u,v,cap);
     }
-    cout << "Matrix: " << endl;
+    cout << "Transform Graph Matrix: " << endl;
     g.PrintGraph();
     int source, sink;
     cout << "Input source vertex: "; cin >> source;
